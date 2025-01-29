@@ -1,0 +1,11 @@
+rvm: true
+before_script:
+  - bundle exec appraisal bundle
+  - bundle exec rails db:schema:load
+builds:
+  build_1:
+    environment:
+      RUBY_VERSION: 3.3.7
+    name: Ruby 3.3.7, Rails 7
+    script:
+      - bundle exec appraisal "rails 7" rspec
