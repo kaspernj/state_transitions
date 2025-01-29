@@ -1,0 +1,10 @@
+rvm: true
+before_script:
+  - bundle exec rails db:schema:load
+builds:
+  build_1:
+    environment:
+      RUBY_VERSION: 3.3.7
+    name: RSpec
+    script:
+      - bundle exec rspec
