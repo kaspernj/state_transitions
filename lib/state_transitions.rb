@@ -12,6 +12,16 @@ module StateTransitions
 
       has_one :current_state_transition,
         lambda {
+          current_table = current_scope.arel.source.left
+          current_table_name = case current_table
+          when Arel::Table
+            current_table.name
+          when Arel::Nodes::TableAlias
+            current_table.right
+          else
+            raise "Couldn't figure out the current table name"
+          end
+
           where(
             <<~SQL.squish
               #{current_table_name}.id = (
@@ -38,21 +48,33 @@ module StateTransitions
     end
 
     def define_first_state_transition_scope(state)
-      sql = <<~SQL.squish
-        #{current_table_name}.id = (
-          SELECT first_state_transition.id
-          FROM state_transitions AS first_state_transition
-          WHERE
-            first_state_transition.resource_type = #{current_table_name}.resource_type AND
-            first_state_transition.resource_id = #{current_table_name}.resource_id AND
-            first_state_transition.state_to = ?
-          ORDER BY first_state_transition.created_at
-          LIMIT 1
-        )
-      SQL
-
       has_one :"first_#{state}_state_transition",
-        -> { where(sql, state) },
+        -> {
+          current_table = current_scope.arel.source.left
+          current_table_name = case current_table
+          when Arel::Table
+            current_table.name
+          when Arel::Nodes::TableAlias
+            current_table.right
+          else
+            raise "Couldn't figure out the current table name"
+          end
+
+          sql = <<~SQL.squish
+            #{current_table_name}.id = (
+              SELECT first_state_transition.id
+              FROM state_transitions AS first_state_transition
+              WHERE
+                first_state_transition.resource_type = #{current_table_name}.resource_type AND
+                first_state_transition.resource_id = #{current_table_name}.resource_id AND
+                first_state_transition.state_to = ?
+              ORDER BY first_state_transition.created_at
+              LIMIT 1
+            )
+          SQL
+
+          where(sql, state)
+        },
         as: :resource,
         class_name: "StateTransitions::StateTransition"
     end

@@ -1,4 +1,4 @@
-class StateTransitions::StateTransition < ApplicationRecord
+class StateTransitions::StateTransition < StateTransitions::ApplicationRecord
   self.table_name = "state_transitions"
 
   belongs_to :resource, polymorphic: true
