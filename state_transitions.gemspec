@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
   spec.name        = "state_transitions"
   spec.version     = StateTransitions::VERSION
   spec.authors     = ["kaspernj"]
-  spec.email       = ["k@spernj.org"]
+  spec.email       = ["kasper@diestoeckels.de"]
   spec.homepage    = "https://github.com/kaspernj/state_transitions"
   spec.summary     = "Tracks state transitions with AASM."
   spec.description = "Tracks state transitions with AASM."
@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/kaspernj/state_transitions"
