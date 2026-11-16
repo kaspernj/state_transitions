@@ -6,5 +6,9 @@ builds:
     environment:
       RUBY_VERSION: 3.3.7
     name: RSpec
+    paths:
+      - "**/*"
+      - "!*.md"
+      - "!docs/**"
     script:
       - bundle exec rspec
