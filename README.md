@@ -57,8 +57,9 @@ Contribution directions go here.
 This repository has one RSpec build. `peak_flow.yml` keeps that build broad for
 source, tests, configuration, lockfiles, and repository metadata, while
 documentation-only changes (`*.md` and `docs/**`) are excluded. Because the
-graph has one lane and no BuildGroups, per-lane savings are not separately
-measurable; a documentation-only change is the terminal skipped-path probe.
+graph has one lane, per-lane savings are not separately measurable, but
+deliveries are filtered; a documentation-only change is the terminal
+skipped-path probe.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
